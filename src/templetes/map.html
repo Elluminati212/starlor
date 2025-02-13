@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 500px;
+        }
+        .filter-container {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Map with Filters</h1>
+    <div class="filter-container">
+        <label for="price_min">Price Min:</label>
+        <input type="number" id="price_min" placeholder="Enter min price">
+
+        <label for="price_max">Price Max:</label>
+        <input type="number" id="price_max" placeholder="Enter max price">
+
+        <label for="ds">Date (ds):</label>
+        <input type="text" id="ds" placeholder="YYYY-MM-DD">
+
+        <label for="hour">Hour:</label>
+        <input type="number" id="hour" placeholder="Enter hour (0-23)">
+
+        <button id="applyFilters">Apply Filters</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([20, 0], 2); // Adjust coordinates and zoom level
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        let markers = []; // Store all markers for filtering
+
+        // Load CSV data (replace with the correct path to your data file)
+        fetch('/home/vasu/app/Map_Today.csv')
+            .then(response => response.text())
+            .then(csvText => {
+                const rows = csvText.split('\n').slice(1); // Skip the header row
+                rows.forEach(row => {
+                    const [latitude, longitude, price, ds, hour] = row.split(',').map(cell => cell.trim());
+                    if (latitude && longitude) {
+                        const marker = L.marker([parseFloat(latitude), parseFloat(longitude)]);
+                        marker.bindPopup(`Price: ${price}<br>Date: ${ds}<br>Hour: ${hour}`);
+                        markers.push({
+                            marker,
+                            price: parseFloat(price),
+                            ds,
+                            hour: parseInt(hour),
+                        });
+                        marker.addTo(map);
+                    }
+                });
+            });
+
+        // Apply filters
+        document.getElementById('applyFilters').addEventListener('click', () => {
+            const priceMin = parseFloat(document.getElementById('price_min').value) || -Infinity;
+            const priceMax = parseFloat(document.getElementById('price_max').value) || Infinity;
+            const dsFilter = document.getElementById('ds').value || null;
+            const hourFilter = parseInt(document.getElementById('hour').value) || null;
+
+            // Remove all markers from the map first
+            markers.forEach(({ marker }) => {
+                map.removeLayer(marker);
+            });
+
+            // Add markers that match the filter
+            markers.forEach(({ marker, price, ds, hour }) => {
+                if (
+                    price >= priceMin &&
+                    price <= priceMax &&
+                    (!dsFilter || ds === dsFilter) &&
+                    (hourFilter === null || hour === hourFilter)
+                ) {
+                    marker.addTo(map); // Show marker
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map with API Data</title>
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+        }
+        .filter-container {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Filter options -->
+    <h1>Interactive Map with Filters</h1>
+    <div class="filter-container">
+        <label for="price_min">Price Min:</label>
+        <input type="number" id="price_min" placeholder="Enter min price">
+
+        <label for="price_max">Price Max:</label>
+        <input type="number" id="price_max" placeholder="Enter max price">
+
+        <label for="ds">Date (ds):</label>
+        <input type="text" id="ds" placeholder="YYYY-MM-DD">
+
+        <label for="hour">Hour:</label>
+        <input type="number" id="hour" placeholder="Enter hour (0-23)">
+
+        <button id="applyFilters">Apply Filters</button>
+    </div>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.control.scale().addTo(map);
+                    setInterval(function(){
+                        map.setView([0, 0]);
+                        setTimeout(function(){
+                            map.setView([60, 0]);
+                        }, 2000);
+                    }, 4000);
+
+
+        // Add tile layer to the map (OpenStreetMap tiles)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // API URL (replace this with your actual API URL)
+        var API_URL = 'http://prediction.elluminatiinc.net/prediction';  // Replace with your API
+
+        // Function to fetch data from the API
+        async function fetchData() {
+            try {
+                let response = await fetch(API_URL);
+                let data = await response.json();
+
+                // Parse the API data and add markers
+                data.forEach(item => {
+                    let lat = item.latitude;
+                    let long = item.longitude;
+                    let category = item.category;  // Assuming category is part of the data
+
+                    // Add a marker for each location
+                    L.marker([lat, long])
+                        .addTo(map)
+                        .bindPopup(`<b>${item.name}</b><br>Category: ${category}`);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Call the function to fetch and display data
+        fetchData();
+
+        // Filter functionality
+        document.getElementById('categoryFilter').addEventListener('change', function () {
+            let selectedCategory = this.value;
+
+            // Remove existing markers
+            map.eachLayer(function (layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            // Fetch and display filtered data
+            fetchData(selectedCategory);
+        });
+    </script>
+</body>
+</html>

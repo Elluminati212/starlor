@@ -1,0 +1,37 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pymongo = "*"
+bcrypt = "==3.2.0"
+passlib = "==1.7.4"
+python-jose = "==3.3.0"
+python-socketio = "*"
+pottery = "*"
+aioredis = "*"
+redis = "*"
+aioredlock = "*"
+bullmq = "*"
+gunicorn = "*"
+pandas = "*"
+folium = "*" 
+prophet = "*"
+plotly = "*"
+scikit-learn = "*"
+numpy = "*"
+fastapi = "*"
+uvicorn = "*"
+python-dotenv = "*"
+pyjwt = "*"
+requests = "*"
+pydantic = "*"
+pillow = "*"
+matplotlib = "*"
+
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"

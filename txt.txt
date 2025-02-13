@@ -1,0 +1,719 @@
+use loops  for mapping fields to fetch from diffrent documant formate
+
+#from booking_histories
+{
+    "_id" : ObjectId("67a35dc09a3bb2f242ca6c82"),
+    "status" : 70,
+    "bookingType" : 1,
+    "pickupAddress" : {
+        "address" : "Unit 1, Babylon, Nobel House, Kalavad Rd, opposite BAPS Swaminarayan Temple, Harihar Society, Kotecha Nagar, Rajkot, Gujarat 360001, India",
+        "latitude" : 22.2911918,
+        "longitude" : 70.7805565,
+        "city" : "",
+        "countryCode" : "IN",
+        "country" : "",
+        "postalCode" : "",
+        "note" : "",
+        "isAddressSelected" : false,
+        "_id" : ObjectId("67a35dc09a3bb2f242ca6c84"),
+        "createdAt" : ISODate("2025-02-05T12:46:56.762Z"),
+        "updatedAt" : ISODate("2025-02-05T12:46:56.762Z")
+    },
+    "destinationAddresses" : [ 
+        {
+            "address" : "7PCQ+6CQ, near Hotel Rasala, Rajkot, Gujarat 360005, India",
+            "latitude" : 22.2705784,
+            "longitude" : 70.7385799,
+            "city" : "Rajkot",
+            "countryCode" : "IN",
+            "country" : "India",
+            "postalCode" : "360005",
+            "note" : "",
+            "placeId" : "ChIJt3bfEJXLWTkRWwgBdzgwSzE",
+            "isAddressSelected" : false,
+            "_id" : ObjectId("67a35dc09a3bb2f242ca6c85"),
+            "createdAt" : ISODate("2025-02-05T12:46:56.763Z"),
+            "updatedAt" : ISODate("2025-02-05T12:46:56.763Z")
+        }
+    ],
+}
+
+#from booking_invoice_histories
+"estimated": {
+    "total": 151,
+    "distance": 0,
+    "time": 0,
+    "waitingTime": 0,
+    "stopWaitingTime": 0,
+    "directionPath": "es|fCwownL",
+    "isMinFareApplied": true,
+    "charges": [
+      {
+        "title": "bookingFee",
+        "price": 50,
+        "priceType": 1,
+        "driverProfit": 8,
+        "driverProfitType": 1,
+        "appliedSlots": [],
+        "applyOn": []
+      },
+      {
+        "title": "minimumFee",
+        "price": 101,
+        "priceType": 1,
+        "driverProfit": 8,
+        "driverProfitType": 1,
+        "appliedSlots": [],
+        "applyOn": []
+      }
+    ],
+    "additionalPrices": [
+      {
+        "title": "Toll Price",
+        "type": 4,
+        "price": 0,
+        "priceType": 1,
+        "driverProfit": 0,
+        "driverProfitType": 2,
+        "driverProfitPercentage": 20,
+        "unit": 1,
+        "isApplyTax": true,
+        "appliedSlots": [],
+        "applyOn": []
+      }
+    ],
+    "accessibilityPrices": [],
+    "taxPrices": [
+      {
+        "title": "GST",
+        "price": 50,
+        "priceType": 1,
+        "driverProfitType": 1,
+        "unit": 100,
+        "appliedSlots": [],
+        "applyOn": [
+          "distancePrice",
+          "bookingFee",
+          "Toll Price"
+        ]
+      }
+    ],
+    "isOutsideBoundary": false,
+    "priceType": 1,
+    "driverEarning": 0
+  }
+
+
+
+
+
+
+
+
+
+
+###########################################################################################################################
+{
+    "_id" : ObjectId("67a35dc09a3bb2f242ca6c82"),
+    "uniqueId" : 20219,
+    "businessType" : 3,
+    "createdDeviceInfo" : {
+        "deviceId" : "ecbcbbed7ebdb3a4",
+        "type" : 2,
+        "typeIds" : [ 
+            ObjectId("660bd605ff307600d9436370")
+        ],
+        "manufacturer" : "Google",
+        "deviceName" : "blueline",
+        "deviceType" : "ANDROID",
+        "os" : "31",
+        "appVersion" : "1.0.5",
+        "preferedLanguage" : "en",
+        "_id" : ObjectId("661cd89a84b8562181faaf68")
+    },
+    "customerId" : ObjectId("660bd605ff307600d9436370"),
+    "partnerId" : null,
+    "hubId" : null,
+    "accessibilityIds" : [],
+    "bookingType" : 5,
+    "bookingTags" : [ 
+        "DELIVERY", 
+        "NOW"
+    ],
+    "status" : 70,
+    "countryId" : ObjectId("65e81cb6c3de686fe4700427"),
+    "cityId" : ObjectId("65e83d39d30ae0728e2fc849"),
+    "vehicleTypeId" : ObjectId("65df0fad9acc3828bd226e7c"),
+    "vehiclePriceId" : ObjectId("6772564d85963bfd1640adec"),
+    "driverIds" : [ 
+        ObjectId("66505983becebacba2df4b8c")
+    ],
+    "rejectedDriverIds" : [],
+    "findDriverVehicleTypeIds" : [ 
+        ObjectId("65df0fad9acc3828bd226e7c")
+    ],
+    "isMovedToMarketPlace" : false,
+    "cancellationReason" : "",
+    "speakingLanguages" : [],
+    "pickupAddress" : {
+        "address" : "Unit 1, Babylon, Nobel House, Kalavad Rd, opposite BAPS Swaminarayan Temple, Harihar Society, Kotecha Nagar, Rajkot, Gujarat 360001, India",
+        "latitude" : 22.2911918,
+        "longitude" : 70.7805565,
+        "city" : "",
+        "countryCode" : "IN",
+        "country" : "",
+        "postalCode" : "",
+        "note" : "",
+        "isAddressSelected" : false,
+        "_id" : ObjectId("67a35dc09a3bb2f242ca6c84"),
+        "createdAt" : ISODate("2025-02-05T12:46:56.762Z"),
+        "updatedAt" : ISODate("2025-02-05T12:46:56.762Z")
+    },
+    "customerNote" : "",
+    "destinationAddresses" : [ 
+        {
+            "address" : "7PCQ+6CQ, near Hotel Rasala, Rajkot, Gujarat 360005, India",
+            "latitude" : 22.2705784,
+            "longitude" : 70.7385799,
+            "city" : "Rajkot",
+            "countryCode" : "IN",
+            "country" : "India",
+            "postalCode" : "360005",
+            "note" : "",
+            "placeId" : "ChIJt3bfEJXLWTkRWwgBdzgwSzE",
+            "isAddressSelected" : false,
+            "_id" : ObjectId("67a35dc09a3bb2f242ca6c85"),
+            "createdAt" : ISODate("2025-02-05T12:46:56.763Z"),
+            "updatedAt" : ISODate("2025-02-05T12:46:56.763Z")
+        }
+    ],
+    "actualDestinationAddresses" : [ 
+        {
+            "address" : "7PCQ+6CQ, near Hotel Rasala, Rajkot, Gujarat 360005, India",
+            "latitude" : 22.2705784,
+            "longitude" : 70.7385799,
+            "city" : "Rajkot",
+            "countryCode" : "IN",
+            "country" : "India",
+            "postalCode" : "360005",
+            "note" : "",
+            "placeId" : "ChIJt3bfEJXLWTkRWwgBdzgwSzE",
+            "isAddressSelected" : false,
+            "_id" : ObjectId("67a473fdc33d28c7859975a7"),
+            "createdAt" : ISODate("2025-02-06T08:34:05.819Z"),
+            "updatedAt" : ISODate("2025-02-06T08:34:05.819Z")
+        }
+    ],
+    "directionPath" : "gx`gCqh_oLjA|B`AvBp@bBFJHX@H?JA@ZXnArBfBdDtB~Dn@x@~ArChBtCdCnEtBjDTl@zB~DlBlDj@fAp@dAxBpCnB|BlFzGb@p@zDrErCrDdA~@`@h@vAbB|@dA~GfIpGzHzA~AfBzBtClDdBjBh@r@vElF~C~Df@rALl@T|EHnEZ|GJjDBhABh@TdELlAj@rLVvDvAtSZdF\\fE}AHwBLC?D~@",
+    "verificationDetail" : [ 
+        {
+            "status" : 50,
+            "otp" : "1234"
+        }, 
+        {
+            "status" : 70,
+            "otp" : "1234"
+        }
+    ],
+    "bookingTime" : 1738759616433.0,
+    "timezone" : "Asia/Kolkata",
+    "bookingInvoiceId" : ObjectId("67a35dc09a3bb2f242ca6c8a"),
+    "rating" : {
+        "customerRate" : 5,
+        "customerReview" : "",
+        "driverRate" : null,
+        "driverReview" : "",
+        "customerMerchantRate" : null,
+        "customerMerchantReview" : "",
+        "driverMerchantRate" : 5,
+        "driverMerchantReview" : "",
+        "merchantCustomerRate" : null,
+        "merchantCustomerReview" : "",
+        "merchantDriverRate" : null,
+        "merchantDriverReview" : "",
+        "createdAt" : ISODate("2025-02-05T12:46:56.763Z"),
+        "updatedAt" : ISODate("2025-02-06T08:34:08.118Z")
+    },
+    "biddingDetail" : {
+        "isBidding" : false,
+        "customerBidPrice" : 0,
+        "finalBidPrice" : 0
+    },
+    "confirmedDriver" : {
+        "id" : ObjectId("66505983becebacba2df4b8c"),
+        "driverType" : 3,
+        "uniqueId" : 127,
+        "name" : "Naruto Uzumaki",
+        "phone" : "+91 8160312102",
+        "email" : "naru@gmail.com",
+        "imageUrl" : "driver_profile/1718020171144orgmkO.jpeg",
+        "rate" : 4.57299270072992,
+        "isFavourite" : false,
+        "vehicleDetail" : {
+            "id" : ObjectId("66505a1abecebacba2df4dc3"),
+            "type" : 3,
+            "vehicleType" : 1,
+            "name" : "SUV",
+            "brandId" : ObjectId("65e83af3239ebc939c2e1f62"),
+            "brand" : {
+                "en" : "TATA",
+                "hi" : "TATA",
+                "mr" : "TATA",
+                "test" : "TATA",
+                "gu" : "",
+                "ar" : "",
+                "cs" : ""
+            },
+            "modelId" : ObjectId("65e83d93791b41525b635059"),
+            "model" : {
+                "en" : "Nexon",
+                "hi" : "Nexon",
+                "mr" : "Nexon",
+                "test" : "",
+                "gu" : "",
+                "ar" : "",
+                "cs" : ""
+            },
+            "color" : "0",
+            "year" : "2000",
+            "plateNo" : "7777"
+        },
+        "location" : {
+            "type" : "Point",
+            "coordinates" : [ 
+                70.738693, 
+                22.2708006
+            ]
+        },
+        "deviceInfo" : {
+            "deviceId" : "0a8b80983e7faca6",
+            "type" : 3,
+            "typeIds" : [ 
+                ObjectId("66505983becebacba2df4b8c")
+            ],
+            "manufacturer" : "OnePlus",
+            "deviceName" : "OnePlus8",
+            "deviceType" : "ANDROID",
+            "os" : "33",
+            "appVersion" : "1.0.0",
+            "preferedLanguage" : "en",
+            "_id" : ObjectId("66b5c53d4c6c477e9c84760b")
+        },
+        "createdAt" : ISODate("2025-02-05T12:47:24.812Z"),
+        "updatedAt" : ISODate("2025-02-05T12:47:24.812Z")
+    },
+    "customerDetail" : {
+        "id" : ObjectId("660bd605ff307600d9436370"),
+        "driverType" : 3,
+        "uniqueId" : 13,
+        "name" : "Smith h",
+        "phone" : "+91 9988775560",
+        "email" : "parth@yopmail.co",
+        "imageUrl" : "customer_profile/1738299472793XDW0lj.jpg",
+        "rate" : 4.86666666666667,
+        "isFavourite" : false,
+        "createdAt" : ISODate("2025-02-05T12:46:56.763Z"),
+        "updatedAt" : ISODate("2025-02-05T12:46:56.763Z")
+    },
+    "findDriverCompletedLoop" : 0,
+    "isBookForOther" : false,
+    "driverToCustomerEstimation" : {
+        "distance" : 5204,
+        "time" : 676,
+        "eta" : 1738760320812.0,
+        "directionPath" : "gx`gCqh_oLjA|B`AvBp@bBFJHX@H?JA@ZXnArBfBdDtB~Dn@x@~ArChBtCdCnEtBjDTl@zB~DlBlDj@fAp@dAxBpCnB|BlFzGb@p@zDrErCrDdA~@`@h@vAbB|@dA~GfIpGzHzA~AfBzBtClDdBjBh@r@vElF~C~Df@rALl@T|EHnEZ|GJjDBhABh@TdELlAj@rLVvDvAtSZdF\\fE}AHwBLC?D~@"
+    },
+    "isManualAssigned" : false,
+    "emergencyContactsHistory" : {
+        "driver" : [],
+        "customer" : [],
+        "_id" : ObjectId("67a35dc09a3bb2f242ca6c7f")
+    },
+    "subscriptionDetails" : {
+        "id" : null,
+        "adminProfit" : null
+    },
+    "completedAt" : 1738830845868.0,
+    "createdAt" : ISODate("2025-02-05T12:46:56.763Z"),
+    "updatedAt" : ISODate("2025-02-06T08:34:08.118Z"),
+    "__v" : 0
+}
+
+
+################################################################################################################################################
+
+
+[{
+  "_id": {
+    "$oid": "664c4664875d6659e535e463"
+  },
+  "bookingId": {
+    "$oid": "664c4664875d6659e535e45d"
+  },
+  "bookingUniqueId": 686,
+  "customerId": {
+    "$oid": "664593a686f657c093aaef70"
+  },
+  "status": 1,
+  "bookingTime": 1716274788614,
+  "timezone": "Asia/Kolkata",
+  "vehiclePriceId": {
+    "$oid": "66265088cb4d6c969dd0357c"
+  },
+  "distanceUnit": 1,
+  "currentRate": 1,
+  "currencyCode": "",
+  "currencySign": "₹",
+  "estimated": {
+    "distance": 0,
+    "time": 0,
+    "waitingTime": 0,
+    "stopWaitingTime": 0,
+    "directionPath": "es|fCwownL",
+    "isMinFareApplied": true,
+    "charges": [
+      {
+        "title": "bookingFee",
+        "price": 50,
+        "priceType": 1,
+        "driverProfit": 8,
+        "driverProfitType": 1,
+        "appliedSlots": [],
+        "applyOn": []
+      },
+      {
+        "title": "minimumFee",
+        "price": 101,
+        "priceType": 1,
+        "driverProfit": 8,
+        "driverProfitType": 1,
+        "appliedSlots": [],
+        "applyOn": []
+      }
+    ],
+    "additionalPrices": [
+      {
+        "title": "Toll Price",
+        "type": 4,
+        "price": 0,
+        "priceType": 1,
+        "driverProfit": 0,
+        "driverProfitType": 2,
+        "driverProfitPercentage": 20,
+        "unit": 1,
+        "isApplyTax": true,
+        "appliedSlots": [],
+        "applyOn": []
+      }
+    ],
+    "accessibilityPrices": [],
+    "taxPrices": [
+      {
+        "title": "GST",
+        "price": 50,
+        "priceType": 1,
+        "driverProfitType": 1,
+        "unit": 100,
+        "appliedSlots": [],
+        "applyOn": [
+          "distancePrice",
+          "bookingFee",
+          "Toll Price"
+        ]
+      }
+    ],
+    "isOutsideBoundary": false,
+    "priceType": 1,
+    "total": 151,
+    "driverEarning": 0
+  },
+  "actual": {
+    "distance": 0,
+    "time": 0,
+    "waitingTime": 0,
+    "stopWaitingTime": 0,
+    "directionPath": "",
+    "isMinFareApplied": false,
+    "charges": [
+      {
+        "title": "cancellationPrice",
+        "price": 0,
+        "priceType": 2,
+        "driverProfit": 0,
+        "driverProfitType": 2,
+        "driverProfitPercentage": 10,
+        "unit": 10,
+        "appliedSlots": [],
+        "applyOn": [
+          "bookingFee",
+          "distancePrice"
+        ]
+      }
+    ],
+    "additionalPrices": [],
+    "accessibilityPrices": [],
+    "taxPrices": [],
+    "isOutsideBoundary": false,
+    "priceType": 0,
+    "total": 0,
+    "driverEarning": 0
+  },
+  "paymentMode": 1,
+  "paymentStatus": 1,
+  "paymentTransactionIds": [],
+  "paymentDetail": {
+    "cash": 0,
+    "wallet": 0,
+    "other": 0,
+    "remainig": 0,
+    "_id": {
+      "$oid": "664c4664875d6659e535e462"
+    },
+    "createdAt": {
+      "$date": "2024-05-21T06:59:48.801Z"
+    },
+    "updatedAt": {
+      "$date": "2024-05-21T06:59:48.801Z"
+    }
+  },
+  "promoDetail": {
+    "code": "",
+    "id": null,
+    "discount": 0,
+    "promoBonus": 0,
+    "discountType": 0
+  },
+  "createdAt": {
+    "$date": "2024-05-21T06:59:48.801Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-21T06:59:48.801Z"
+  },
+  "__v": 0
+}]
+
+
+
+
+############################################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from pymongo import MongoClient
+import pandas as pd
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta
+import calendar
+import requests
+
+# Function to create a MongoDB client
+def create_mongo_client(mongo_uri):
+    return MongoClient(mongo_uri)
+
+
+# Function to fetch a chunk of data for a specific date range
+def fetch_chunk_by_date_range(mongo_uri, db_name, collection_name, start_date, end_date, skip, limit):
+    client = create_mongo_client(mongo_uri)
+    db = client[db_name]
+    collection = db[collection_name]
+    query = {
+        "provider_trip_start_time": {
+            "$gte": start_date,
+            "$lt": end_date
+        }
+    }
+
+pipeline = [
+    {
+        "$lookup": {
+            "from": "booking_invoice_histories",
+            "localField": "bookingInvoiceId",
+            "foreignField": "_id",
+            "as": "invoice"
+        }
+    },
+    {
+        "$project": {
+            "_id": 1,
+            "bookingType": 1,
+            "status": 1,
+            "pickupTime": "$pickupAddress.createdAt",
+            "dropTime": "$destinationAddresses.createdAt",
+            "source": [{
+                "latitude": "$pickupAddress.latitude",
+                "longitude": "$pickupAddress.longitude"
+            }],
+            "destination": [{
+                "latitude": "$destinationAddresses.latitude",
+                "longitude": "$destinationAddresses.longitude"
+            }],
+            "distance": "$driverToCustomerEstimation.distance",
+            "total": { "$arrayElemAt": [ "$invoice.estimated.total", 0 ] } ,
+        }
+    }
+]
+
+# Execute the aggregation
+results = db.booking_histories.aggregate(pipeline)
+
+
+# for doc in results:
+#     print(doc)
+
+data = list(results)
+
+# Create a pandas DataFrame from the list of dictionaries
+df1 = pd.json_normalize(data)
+df1.to_csv('doc.csv', index=False)
+
+# Remap the fields of the existing DataFrame `df` to the specified fields
+df = df1.rename(columns={
+    "_id": "_id",
+    "status": "is_trip_completed",
+    "bookingType": "booking_type",
+    "pickupTime": "provider_trip_start_time",
+    "dropTime": "provider_trip_end_time",
+    "source": "sourceLocation",
+    "distance": "total_distance",
+    "total": "total",
+    "destination": "destinationLocation"
+})
+
+
+
+
+
+
+
+# Function to process data in parallel
+def fetch_data_by_month(mongo_uri, db_name, collection_name, start_date, end_date, chunk_size):
+    client = create_mongo_client(mongo_uri)
+    db = client[db_name]
+    collection = db[collection_name]
+    total_docs = collection.count_documents({
+        "provider_trip_start_time": {
+            "$gte": start_date,
+            "$lt": end_date
+        }
+    })
+    with ThreadPoolExecutor() as executor:
+        futures = []
+        for i in range(0, total_docs, chunk_size):
+            futures.append(executor.submit(fetch_chunk_by_date_range, mongo_uri, db_name, collection_name, start_date, end_date, i, chunk_size))
+
+        # Combine results from all threads
+        all_data = []
+        for future in futures:
+            all_data.extend(future.result())
+        return all_data
+
+# Function to iterate through each month and fetch data
+def fetch_data_for_all_months(mongo_uri, db_name, collection_name, start_date, end_date, chunk_size):
+    current_date = start_date
+    all_data = []
+
+    while current_date < end_date:
+        # Calculate the start and end of the current month
+        first_day_of_month = current_date.replace(day=1)
+        last_day_of_month = current_date.replace(
+            day=calendar.monthrange(current_date.year, current_date.month)[1]
+        )
+        next_month = last_day_of_month + timedelta(days=1)
+
+        print(f"Fetching data from {first_day_of_month} to {next_month}")
+        monthly_data = fetch_data_by_month(mongo_uri, db_name, collection_name, first_day_of_month, next_month, chunk_size)
+        all_data.extend(monthly_data)
+        current_date = next_month
+
+    return all_data
+
+# Function to call the API and get credentials, with a fallback to default credentials
+def get_api_credentials():
+    url = 'http://apiplatform.elluminatiinc.net/api/service_config/credentials?product=STARLOR&service=AI_PREDICTION'
+    try:
+        response = requests.get(url, timeout=10)  # Adding a timeout for better error handling
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"API call failed with status code {response.status_code}. Using default credentials.")
+    except (requests.RequestException, ValueError) as e:
+        print(f"Error during API call: {e}. Using default credentials.")
+    
+    # Default credentials
+    return {
+        "data": {
+            "serviceConfig": {
+                "dbUrl": "mongodb+srv://read_access:g4WJ9ZstQzwsa3lm@rydexnew.issgelo.mongodb.net/RydeX_history?retryWrites=true&w=majority",
+                "dbName": "RydeX_history",
+                "collection": "booking_histories"
+            }
+        }
+    }
+
+# Example usage of the API credentials function
+if __name__ == "__main__":
+    credentials = get_api_credentials()
+    print(credentials)
+
+    # Extract MongoDB credentials from the API response
+    try:
+        mongo_uri = credentials['data']['serviceConfig']['dbUrl']
+        db_name = credentials['data']['serviceConfig']['dbName']
+        collection_name = credentials['data']['serviceConfig']['collection']
+    except KeyError as e:
+        print(f"KeyError: {e} not found in the credentials")
+        # Handle the missing key error appropriately
+        mongo_uri = "default_mongo_uri"
+        db_name = "default_db_name"
+        collection_name = "default_collection_name"
+
+    # Define the overall date range for your query
+    start_date = datetime(2024, 12, 1)  # Adjust as needed
+    end_date = datetime(2024, 12, 2)  # Adjust as needed
+    # end_date = datetime.today()  # Use today's date
+    chunk_size = 1000  # Number of documents per thread
+
+    # Fetch data for all months
+    all_data = fetch_data_for_all_months(mongo_uri, db_name, collection_name, start_date, end_date, chunk_size)
+
+    # Convert to Pandas DataFrame
+    df = pd.DataFrame(all_data)
+
+    # Display the DataFrame
+    print(df.head())

@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map with API Data</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+        .filter-container {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="filter-container">
+        <label for="date-filter">Date (ds):</label>
+        <input type="date" id="date-filter">
+
+        <label for="hour-filter">Hour:</label>
+        <input type="number" id="hour-filter" min="0" max="23">
+
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        const map = L.map('map').setView([0, 0], 2); // Default view
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        let markers = [];
+        const apiUrl = "https://your-api-url.com/data"; // Replace with your API endpoint
+
+        async function fetchData() {
+            const response = await fetch(apiUrl);
+            return await response.json();
+        }
+
+        function updateMap(data) {
+            // Clear existing markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+
+            data.forEach(item => {
+                const marker = L.marker([item.latitude, item.longitude])
+                    .bindPopup(`<b>DS:</b> ${item.ds}<br><b>Hour:</b> ${item.hour}`)
+                    .addTo(map);
+                markers.push(marker);
+            });
+
+            if (markers.length > 0) {
+                const group = L.featureGroup(markers);
+                map.fitBounds(group.getBounds());
+            }
+        }
+
+        async function loadMapData() {
+            const data = await fetchData();
+            updateMap(data);
+        }
+
+        async function applyFilters() {
+            const dateFilter = document.getElementById("date-filter").value;
+            const hourFilter = document.getElementById("hour-filter").value;
+
+            const data = await fetchData();
+            const filteredData = data.filter(item => {
+                return (!dateFilter || item.ds === dateFilter) &&
+                       (!hourFilter || item.hour === parseInt(hourFilter));
+            });
+
+            updateMap(filteredData);
+        }
+
+        // Load initial data
+        loadMapData();
+    </script>
+</body>
+</html>
