@@ -32,6 +32,8 @@ pipeline = [
             "_id": 1,
             "bookingType": 1,
             "status": 1,
+            "cityId": 1,
+            "countryId": 1,
             "pickupTime": "$pickupAddress.createdAt",
             "dropTime": "$destinationAddresses.createdAt",
             "source": [{
@@ -64,6 +66,8 @@ df1.to_csv('doc.csv', index=False)
 # Remap the fields of the existing DataFrame `df` to the specified fields
 df = df1.rename(columns={
     "_id": "_id",
+    "countryId": "countryId",
+    "cityId": "cityId",
     "status": "is_trip_completed",
     "bookingType": "booking_type",
     "pickupTime": "provider_trip_start_time",
@@ -173,6 +177,9 @@ kmeans = KMeans(n_clusters=10, random_state=42)
 predicted_trips = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper', 'date', 'hour', 'minute']]
 predicted_trips['cluster'] = kmeans.fit_predict(predicted_trips[['hour', 'minute']])
 
+# Add cityId and countryId
+predicted_trips = predicted_trips.merge(df_completed[['cluster', 'cityId', 'countryId']].drop_duplicates(), on='cluster', how='left')
+
 # Add price range
 price_range = df_completed.groupby('cluster')['total'].agg(['min', 'max']).reset_index()
 price_range.rename(columns={'min': 'price_min', 'max': 'price_max'}, inplace=True)
@@ -253,71 +260,11 @@ import folium
 from folium.plugins import MarkerCluster
 import branca.colormap as cm
 import pandas as pd
-
-# Assuming 'high_demand_clusters' and 'predicted_trips' are already defined
-# Calculate price_min and price_max for each cluster
-cluster_prices = high_demand_clusters.groupby('cluster')['total'].agg(price_min='min', price_max='max').reset_index()
-
-# Merge booking_type  and price_min and price-max into cluster_data
-cluster_data = high_demand_clusters[['latitude', 'longitude', 'cluster', 'booking_type', ]].merge(
-    predicted_trips[['ds']], left_index=True, right_index=True, how='left'
-).merge(
-    cluster_prices, on='cluster', how='left'
-)
-
-# Save the data to a CSV file
-cluster_data.to_csv("Map.csv", index=False)
-
-# Initialize the map
-m = folium.Map(
-    location=[high_demand_clusters['latitude'].mean(), high_demand_clusters['longitude'].mean()],
-    zoom_start=12
-)
-
-# Define a color palette for clusters
-colormap = cm.LinearColormap(['blue', 'green', 'yellow', 'orange', 'red'], vmin=-1, vmax=cluster_data['cluster'].max())
-colormap.caption = 'Clusters'
-
-# Add the color map to the map
-colormap.add_to(m)
-
-# Add clusters to the map
-marker_cluster = MarkerCluster().add_to(m)
-
-for _, row in cluster_data.iterrows():
-    cluster_color = colormap(row['cluster'])  # Assign color based on cluster ID
-    folium.CircleMarker(
-        location=(row['latitude'], row['longitude']),
-        radius=6,
-        color=cluster_color,
-        fill=True,
-        fill_color=cluster_color,
-        fill_opacity=0.7,
-        tooltip=(
-            f"Cluster: {row['cluster']}<br>"
-            f"Timestamp: {row['ds']}<br>"
-            f"Price Range: {row['price_min']} - {row['price_max']}<br>"
-            f"Booking Type: {row['booking_type']}<br>"
-        )
-    ).add_to(marker_cluster)
-
-# Save the map to an HTML file
-m.save("Map.html")
-
-print("Map with clusters saved as 'Map.html'.")
-print("Cluster data saved as 'Map.csv'.")
-
-
-
-import folium
-from folium.plugins import MarkerCluster
-import branca.colormap as cm
-import pandas as pd
 from datetime import datetime
 
 # Assuming 'high_demand_clusters' and 'predicted_trips' are already defined
 # Prepare the data for clustering, including 'ds' (date/time)
-cluster_data = high_demand_clusters[['latitude', 'longitude', 'cluster', 'booking_type']].merge(
+cluster_data = high_demand_clusters[['latitude', 'longitude', 'cluster', 'booking_type', 'cityId', 'countryId']].merge(
     predicted_trips[['ds', 'price_min', 'price_max']], left_index=True, right_index=True, how='left'
 )
 
@@ -328,15 +275,11 @@ cluster_data['ds'] = pd.to_datetime(
 
 # Filter to include only today's trips
 today = datetime.now().date()
-cluster_data['ds'] = pd.to_datetime(cluster_data['ds'])
+cluster_data['date_stamp'] = cluster_data['ds'].dt.strftime('%d-%m-%Y %H:%M')
 cluster_data = cluster_data[cluster_data['ds'].dt.date == today]
 
 # Save the filtered data to a CSV file
-cluster_data.to_csv("Map_Today.csv", index=False)
-
-# Save the filtered data to a JSON file
-json_file_path = "Map_Today.json"
-cluster_data.to_json(json_file_path, orient='records', date_format='iso')
+cluster_data.drop(columns=['ds', 'cluster']).to_csv("/home/vasu/starlor/starlor/Map_Today.csv", index=False)
 
 # Initialize the map
 m = folium.Map(
@@ -374,7 +317,8 @@ for _, row in cluster_data.iterrows():
             f"Timestamp: {row['ds']}<br>"
 	        f"Price Range: {row['price_min']} - {row['price_max']}<br>"
             f"Booking Type: {row['booking_type']}<br>"
-
+            f"City: {row['cityId']}<br>"
+            f"Country: {row['countryId']}<br>"
         )
     ).add_to(marker_cluster)
 
@@ -392,10 +336,10 @@ from folium.plugins import MarkerCluster
 from datetime import datetime, timedelta
 
 # Load data
-predicted_trips = pd.read_csv("/home/vasu/STARLOR/Map_Today.csv")
+predicted_trips = pd.read_csv("/home/vasu/starlor/starlor/Map_Today.csv")
 
 # Ensure datetime column is present
-predicted_trips['datetime'] = pd.to_datetime(predicted_trips['ds'])  # Adjust 'ds' to match the actual column name
+predicted_trips['datetime'] = pd.to_datetime(predicted_trips['date_stamp'])  # Adjust 'ds' to match the actual column name
 
 # Get the current time and the next hour
 current_time = datetime.now()
@@ -482,7 +426,7 @@ db = client["starlorDB"]
 collection = db["prediction"]
 
 # Read the CSV file
-df = pd.read_csv("/home/vasu/STARLOR/Map_Today.csv")
+df = pd.read_csv("/home/vasu/starlor/starlor/Map_Today.csv")
 print(df)
 # Insert the data into MongoDB
 collection.insert_many(df.to_dict("records"))
